@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - image: chedi1/angular:v1.0.0
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: angular                           
         env:
         - name: var1
