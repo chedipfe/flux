@@ -27,14 +27,14 @@ spec:
         enabled: true
         existingClaim: keycloak-pvc
 
-      ingress:
-        enabled: true
-        hostname: keycloak.example.com
-        ingressClassName: nginx
-        path: /
-        annotations:
-          nginx.ingress.kubernetes.io/rewrite-target: /
-        tls: false
+    ingress:
+      enabled: true
+      hostname: keycloak.com
+      ingressClassName: nginx
+      path: /
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
+      tls: false
 
     postgresql:
       enabled: true
