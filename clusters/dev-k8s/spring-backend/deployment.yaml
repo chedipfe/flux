@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring  
+  namespace: my-application   
+spec:
+  replicas: 1             
+  selector:
+    matchLabels:
+      app: backend      
+  template:
+    metadata:
+      labels:
+        app: backend    
+    spec:
+      containers:
+      - image: chedi1/spring:v1.0.0
+        imagePullPolicy: Always 
+        name: spring                           
+        env:
+        - name: var1
+          value: "value1"
+        ports:
+        - containerPort: 8081    
