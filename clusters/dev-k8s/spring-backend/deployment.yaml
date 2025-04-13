@@ -18,7 +18,16 @@ spec:
         imagePullPolicy: Always 
         name: spring                           
         env:
-        - name: var1
-          value: "value1"
+        - name: spring.datasource.url
+          value: "jdbc:postgresql://postgres.postgres.svc.cluster.local:5432/chadi-db"
+        - name: spring.datasource.username
+          value: "postgres"
+        - name: spring.datasource.password
+          value: "123456789"
+        - name: spring.security.oauth2.resourceserver.jwt.issuer-uri
+          value: "http://keycloak.keycloak.svc.cluster.local/realms/chedi_realm"
+        - name: jwt.auth.converter.resource-id
+          value: "service-client"  
+
         ports:
         - containerPort: 8081    
