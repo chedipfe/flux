@@ -29,7 +29,7 @@ spec:
 
     ingress:
       enabled: true
-      hostname: keycloak.com
+      hostname: keycloak.keycloak.svc.cluster.local
       ingressClassName: nginx
       path: /
       annotations:
