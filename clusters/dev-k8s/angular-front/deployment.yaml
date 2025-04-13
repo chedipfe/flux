@@ -21,4 +21,4 @@ spec:
         - name: var1
           value: "value1"
         ports:
-        - containerPort: 4200    
+        - containerPort: 80    
