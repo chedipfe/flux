@@ -1,4 +1,4 @@
-# Le ClusterIssuer utilise un certificat de CA et sa clé privée pour signer des certificats, y compris des certificats pour des ressources comme les Ingress dans Kubernetes
+# Le ClusterIssuer utilise un certificat de CA et sa clé privée stockés dans root-ca-secret pour signer les certificats, y compris les certificats des Ingress dans Kubernetes
 
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
