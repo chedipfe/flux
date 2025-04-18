@@ -1,5 +1,5 @@
 # Installe Elastic Operator
-
+# we must install the helm release of elastic operator before installing the elasticsearch, agents and kibana
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
