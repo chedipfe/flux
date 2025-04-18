@@ -1,0 +1,116 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: kibana
+  namespace: elastic-system
+spec:
+  version: 8.17.5
+  image: docker.elastic.co/kibana/kibana:8.17.5
+  count: 1
+  elasticsearchRef:
+    name: elasticsearch
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: false
+  config:
+    telemetry.enabled: false
+    xpack.security.enabled: true
+    xpack.reporting.roles.enabled: false
+    xpack.reporting.kibanaServer.hostname: localhost
+    elasticsearch.ssl.verificationMode: none
+    xpack.fleet.agents.elasticsearch.hosts: ["https://elasticsearch-es-http.elastic-system.svc:9200"]
+    xpack.fleet.agents.fleet_server.hosts: ["https://fleet-server-agent-http.elastic-system.svc:8220"]
+    xpack.fleet.packages:
+      - name: system
+        version: latest
+      - name: kubernetes
+        version: latest
+      - name: fleet_server
+        version: latest
+    xpack.fleet.agentPolicies:
+      - name: Fleet Server policy
+        id: fleet-server-policy
+        namespace: default
+        monitoring_enabled:
+          - logs
+          - metrics
+        unenroll_timeout: 900
+        package_policies:
+          - name: fleet_server-1
+            package:
+              name: fleet_server
+          - name: system-1
+            package:
+              name: system
+          - name: kubernetes-1
+            package:
+              name: kubernetes
+            inputs:
+              - type: kubernetes/metrics
+                enabled: true
+                streams:
+                  - data_stream:
+                      dataset: kubernetes.state_container
+                  - data_stream:
+                      dataset: kubernetes.state_pod
+                  - data_stream:
+                      dataset: kubernetes.state_node
+              - type: kubernetes/logs
+                enabled: true
+      - name: ECK Agent policy
+        id: eck-agent
+        namespace: default
+        monitoring_enabled:
+          - logs
+          - metrics
+        unenroll_timeout: 900
+        package_policies:
+          - name: system-1
+            package:
+              name: system
+          - name: kubernetes-1
+            package:
+              name: kubernetes
+            inputs:
+              - type: kubernetes/metrics
+                enabled: true
+                streams:
+                  - data_stream:
+                      dataset: kubernetes.state_container
+                  - data_stream:
+                      dataset: kubernetes.state_pod
+                  - data_stream:
+                      dataset: kubernetes.state_node
+              - type: kubernetes/logs
+                enabled: true
+      - name: RKE2 Agent policy
+        id: rke2-policy
+        namespace: default
+        monitoring_enabled:
+          - logs
+          - metrics
+        unenroll_timeout: 900
+        package_policies:
+          - name: kubernetes-1
+            package:
+              name: kubernetes
+            inputs:
+              - type: kubernetes/metrics
+                enabled: true
+              - type: kubernetes/logs
+                enabled: true
+      - name: ECK Fleet Server policy
+        id: eck-fleet-server
+        namespace: default
+        monitoring_enabled:
+          - logs
+          - metrics
+        unenroll_timeout: 900
+        package_policies:
+          - name: fleet_server-1
+            package:
+              name: fleet_server
+            inputs:
+              - type: fleet-server
+                enabled: true

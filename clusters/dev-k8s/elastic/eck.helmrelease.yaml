@@ -1,0 +1,72 @@
+# Installe Elastic Operator
+
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: elastic-operator
+  namespace: elastic-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: eck-operator
+      version: 2.14.0
+      sourceRef:
+        kind: HelmRepository
+        name: elastic
+        namespace: flux-system
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  values:
+    image:
+      repository: registry.msicint.iamdg.net.ma/elastic/eck/eck-operator
+      tag: 2.11.1    
+    nameOverride: "elastic-operator"
+    fullnameOverride: "elastic-operator"
+    installCRDs: true
+    managedNamespaces: []
+    replicaCount: 1
+    resources:
+      limits:
+        cpu: 1
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 150Mi
+    podSecurityContext:
+      runAsNonRoot: true
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+    webhook:
+      enabled: true
+      manageCerts: true
+      failurePolicy: Ignore
+      certsDir: "/tmp/k8s-webhook-server/serving-certs"
+    config:
+      metrics:
+        port: "8080"
+        secureMode:
+          enabled: true
+      logVerbosity: "0"
+      containerRegistry: docker.elastic.co
+      maxConcurrentReconciles: "3"
+      caValidity: 8760h
+      caRotateBefore: 24h
+      certificatesValidity: 8760h
+      certificatesRotateBefore: 24h
+      kubeClientTimeout: 60s
+      elasticsearchClientTimeout: 180s
+      validateStorageClass: true
+      enableLeaderElection: true
+      elasticsearchObservationInterval: 10s
+    podMonitor:
+      enabled: true
+      interval: 5m
+      scrapeTimeout: 30s

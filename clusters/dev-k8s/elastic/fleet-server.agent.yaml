@@ -1,0 +1,30 @@
+apiVersion: agent.k8s.elastic.co/v1alpha1
+kind: Agent
+metadata:
+  name: fleet-server
+  namespace: elastic-system
+spec:
+  version: 8.17.5
+  image: docker.elastic.co/elastic/elastic-agent:8.17.5
+  kibanaRef:
+    name: kibana
+  elasticsearchRefs:
+  - name: elasticsearch
+  mode: fleet
+  fleetServerEnabled: true
+  policyID: eck-fleet-server
+  deployment:
+    replicas: 1
+    podTemplate:
+      spec:
+        serviceAccountName: elastic-agent
+        automountServiceAccountToken: true
+        securityContext:
+          runAsUser: 0
+
+# Ce manifeste :
+# Déploie Elastic Agent en Fleet Server
+# Connecté à Kibana et Elasticsearch
+# Utilise une image privée
+# Configure l'agent avec une policy spécifique
+# Lance 1 pod avec privilèges root
