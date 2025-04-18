@@ -21,8 +21,8 @@ spec:
     crds: CreateReplace
   values:
     image:
-      repository: registry.msicint.iamdg.net.ma/elastic/eck/eck-operator
-      tag: 2.11.1    
+      repository: docker.elastic.co/eck/eck-operator
+      tag: 2.14.0    
     nameOverride: "elastic-operator"
     fullnameOverride: "elastic-operator"
     installCRDs: true
