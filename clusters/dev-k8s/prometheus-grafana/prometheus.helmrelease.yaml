@@ -1,0 +1,32 @@
+# Installe Elastic Operator
+# we must install the helm release of elastic operator before installing the elasticsearch, agents and kibana
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: kube-prometheus-release 
+  namespace: prometheus-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: kube-prometheus-stack 
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+        namespace: flux-system
+  install:
+    crds: Create
+  upgrade:
+    crds: CreateReplace
+  values:
+    prometheus:
+      service:
+        type: NodePort
+    grafana:
+      service:
+        type: NodePort
+    alertmanager:
+      service:
+        type: NodePort
+  
+  
