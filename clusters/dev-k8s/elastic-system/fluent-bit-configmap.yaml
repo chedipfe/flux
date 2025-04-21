@@ -25,7 +25,7 @@ data:
 
     [INPUT]
         Name tail
-        Path /var/log/containers/simple-webapp-deployment*.log
+        Path /var/log/containers/spring*.log
         multiline.parser docker, cri
         Tag kube.*
         Mem_Buf_Limit 5MB
