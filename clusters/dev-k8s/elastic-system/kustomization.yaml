@@ -11,5 +11,4 @@ resources:
   - fluent-bit-sa.yaml
   - fluent-bit.yaml
   - kibana.yaml
-  - pv.yml
  
