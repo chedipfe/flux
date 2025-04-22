@@ -20,27 +20,27 @@ spec:
     prometheus:
       service:
         type: NodePort
-      ingress:
-        enabled: true
-        ingressClassName: nginx
-        annotations:
-          kubernetes.io/ingress.class: nginx
-          nginx.ingress.kubernetes.io/ssl-redirect: "false"
-        hosts:
-          - prometheus.com
-        path: /   
+      # ingress:
+      #   enabled: true
+      #   ingressClassName: nginx
+      #   annotations:
+      #     kubernetes.io/ingress.class: nginx
+      #     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      #   hosts:
+      #     - prometheus.com
+      #   path: /   
     grafana:
       service:
         type: NodePort
-      ingress:
-        enabled: true
-        ingressClassName: nginx
-        annotations:
-          kubernetes.io/ingress.class: nginx
-          nginx.ingress.kubernetes.io/ssl-redirect: "false"
-        hosts:
-          - grafana.com
-        path: /
+      # ingress:
+      #   enabled: true
+      #   ingressClassName: nginx
+      #   annotations:
+      #     kubernetes.io/ingress.class: nginx
+      #     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      #   hosts:
+      #     - grafana.com
+      #   path: /
     alertmanager:
       service:
         type: NodePort
