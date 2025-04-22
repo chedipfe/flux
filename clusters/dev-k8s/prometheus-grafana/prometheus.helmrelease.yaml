@@ -18,9 +18,6 @@ spec:
     crds: CreateReplace
   values:
     prometheus:
-      prometheusSpec:
-        externalLabels:
-          cluster: minikube
       service:
         type: NodePort
       ingress:
