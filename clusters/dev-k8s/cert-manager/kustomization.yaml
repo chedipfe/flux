@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
 - root-ca-secret.yaml
 - ca-cluster-issuer.yaml
+- cert-manager-repo.yaml
+- cert-manager.helmrelease.yaml
