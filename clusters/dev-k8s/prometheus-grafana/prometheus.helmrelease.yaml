@@ -24,7 +24,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - host: prometheux.com
+          - host: prometheus.com
             paths:
               - path: /
                 pathType: Prefix   
@@ -35,7 +35,7 @@ spec:
         enabled: true
         ingressClassName: nginx
         hosts:
-          - host: kibana.com
+          - host: grafana.com
             paths:
               - path: /
                 pathType: Prefix 
