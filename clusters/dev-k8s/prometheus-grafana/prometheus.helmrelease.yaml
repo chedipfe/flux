@@ -20,14 +20,14 @@ spec:
     prometheus:
       service:
         type: NodePort
-      ingress:
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - host: prometheus.com
-            paths:
-              - path: /
-                pathType: Prefix   
+      # ingress:
+      #   enabled: true
+      #   ingressClassName: nginx
+      #   hosts:
+      #     - host: prometheus.com
+      #       paths:
+      #         - path: /
+      #           pathType: Prefix   
     grafana:
       service:
         type: NodePort
