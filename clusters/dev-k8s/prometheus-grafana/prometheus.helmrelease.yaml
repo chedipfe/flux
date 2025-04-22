@@ -31,14 +31,14 @@ spec:
     grafana:
       service:
         type: NodePort
-      ingress:
-        enabled: true
-        ingressClassName: nginx
-        hosts:
-          - host: grafana.com
-            paths:
-              - path: /
-                pathType: Prefix 
+      # ingress:
+      #   enabled: true
+      #   ingressClassName: nginx
+      #   hosts:
+      #     - host: grafana.com
+      #       paths:
+      #         - path: /
+      #           pathType: Prefix 
     alertmanager:
       service:
         type: NodePort
