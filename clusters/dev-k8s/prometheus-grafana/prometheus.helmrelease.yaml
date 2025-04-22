@@ -26,11 +26,19 @@ spec:
         hosts:
           - host: prometheux.com
             paths:
-              - /
-        pathtype: prefix
+              - path: /
+                pathType: Prefix   
     grafana:
       service:
         type: NodePort
+      ingress:
+        enabled: true
+        ingressClassName: nginx
+        hosts:
+          - host: kibana.com
+            paths:
+              - path: /
+                pathType: Prefix 
     alertmanager:
       service:
         type: NodePort
